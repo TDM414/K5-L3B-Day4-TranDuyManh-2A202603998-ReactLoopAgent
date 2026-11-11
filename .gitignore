@@ -1,5 +1,30 @@
+# Environment & Secrets (Không commit API key)
 .env
+.env.*
+!.env.example
+
+# Virtual environments
 .venv/
+venv/
+env/
+
+# Python cache & bytecode
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary eval & test outputs (giữ lại eval_before.json, eval_after.json, eval_bonus.json)
 eval_results*.json
+bonus_*.json
+temp_*.json
