@@ -5,6 +5,25 @@ import json
 import os
 from pathlib import Path
 import sys
+
+def _load_env():
+    env_path = Path(__file__).resolve().parents[1] / '.env'
+    if env_path.exists():
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                if line.startswith('export '):
+                    line = line[7:].strip()
+                if '=' in line:
+                    k, v = line.split('=', 1)
+                    k, v = k.strip(), v.strip().strip('"\'')
+                    if k and k not in os.environ:
+                        os.environ[k] = v
+
+_load_env()
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from agent import run_agent
 from providers import Provider
